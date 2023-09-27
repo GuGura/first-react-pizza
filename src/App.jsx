@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, {lazy} from 'react';
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import Menu from "./featrues/menu/Menu.jsx";
+import Cart from "./featrues/cart/Cart.jsx";
+import Order from "./featrues/order/Order.jsx";
+import CreateOrder from "./featrues/order/CreateOrder.jsx";
+import AppLayout from "./ui/AppLayout.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+const Home = lazy(() => import("./ui/Home.jsx"))
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const router = createBrowserRouter([
+    {
+        element: <AppLayout/>, children: [
+            {path: '/', element: <Home/>},
+            {path: '/menu', element: <Menu/>},
+            {path: '/cart', element: <Cart/>},
+            {path: '/order/new', element: <CreateOrder/>},
+            {path: '/order/:orderId', element: <Order/>},
+        ]
+    },
+
+])
+
+function App(props) {
+    return <RouterProvider router={router}/>
 }
 
-export default App
+export default App;

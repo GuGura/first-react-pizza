@@ -2,8 +2,8 @@ import React, {lazy} from 'react';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Menu, {loader as menuLoader} from "./featrues/menu/Menu.jsx";
 import Cart from "./featrues/cart/Cart.jsx";
-import Order from "./featrues/order/Order.jsx";
-import CreateOrder from "./featrues/order/CreateOrder.jsx";
+import Order, {loader as orderLoader} from "./featrues/order/Order.jsx";
+import CreateOrder, {action as createOrderAction} from "./featrues/order/CreateOrder.jsx";
 import AppLayout from "./ui/AppLayout.jsx";
 import Error from "./ui/Error.jsx";
 
@@ -22,8 +22,16 @@ const router = createBrowserRouter([
                 errorElement: <Error/>,
             },
             {path: '/cart', element: <Cart/>},
-            {path: '/order/new', element: <CreateOrder/>},
-            {path: '/order/:orderId', element: <Order/>},
+            {
+                path: '/order/new',
+                element: <CreateOrder/>,
+                action: createOrderAction,
+            },
+            {
+                path: '/order/:orderId',
+                element: <Order/>,
+                loader: orderLoader
+            },
         ]
     },
 

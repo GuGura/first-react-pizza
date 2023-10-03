@@ -9,6 +9,8 @@ import CreateOrder, {
 import AppLayout from './ui/AppLayout.jsx';
 import Error from './ui/Error.jsx';
 import Home from './ui/Home.jsx';
+import { Provider } from 'react-redux';
+import store from './store.js';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +40,11 @@ const router = createBrowserRouter([
 ]);
 
 function App(props) {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

@@ -11,6 +11,7 @@ import Error from './ui/Error.jsx';
 import Home from './ui/Home.jsx';
 import { Provider } from 'react-redux';
 import store from './store.js';
+import { action as updateOrderAction } from './featrues/order/UpdateOrder.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,8 @@ const router = createBrowserRouter([
         path: '/order/:orderId',
         element: <Order />,
         loader: orderLoader,
+        errorElement: <Error />,
+        action: updateOrderAction,
       },
     ],
   },
